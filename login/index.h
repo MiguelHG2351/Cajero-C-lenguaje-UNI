@@ -47,5 +47,12 @@ void login() {
         sleep(2);
         userNew(users, password);
         break;
+        case 3:
+            printf("Adios :(");
+            sleep(2);
+        break;
+        default:
+        printf("Error");
+        login();
     }
 }

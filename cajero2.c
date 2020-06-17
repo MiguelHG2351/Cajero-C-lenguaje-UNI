@@ -1,8 +1,10 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <conio.h>
 #include <string.h>
+#include <graphics.h>
 #include "login/index.h"
 
 
@@ -25,9 +27,9 @@ int reducer(int state, char action) {
     return 0;
 }
 
-void perfil() {
-    printf("Bienvendio\n");
-
+int perfil(int i, char user) {
+    printf("Bienvendio %s\n", user);
+    getch();
 }
 
 int validar(char user, int password) {
@@ -47,24 +49,28 @@ int validar(char user, int password) {
     sleep(1);
     system("cls");
     textcolor(GREEN);printf("\n Compiled Succefull!");
-    printf("%i", password);    
-    sleep(2);
+    printf("\n%i\n", initial[1].pass);
+    printf("\n%i\n", initial[2].pass);
+    printf("\n%s\n", initial[1].user);
+    printf("\n%s\n", initial[2].user);
 
-    for ( i = 0; i < 20; i++)
+    sleep(5);
+    response = -1;
+    for ( i = 1; i <= 20; i++)
     {
-        if (strcmp(user,initial[i].user) == 0&& password == initial[i].pass)
+        if (strcmp(user,initial[i].user) > 0 && password == initial[i].pass)
         {
-            response = 1;
+            response = i;
+            break;
         }
         
     }
     
-    
-    if (response  >0)
+    if (response >=0)
     {
-        printf("\nBienvenido, PAGA TUS DEUDAS >:V\n");
+        printf("\n\tBienvenido!!!, PAGA TUS DEUDAS >:V\n");
         sleep(2);
-        perfil();
+        perfil(i, initial[i].user);
     } else
     {
         printf("\n\n\tNo existe, no lo hay xd\n\n");
@@ -86,15 +92,27 @@ int validar(char user, int password) {
 int userNew(char user, int password) {
     int i = 1;
     system("cls");
-    initial[i].user = user;
-    initial[i].pass = password;
-    printf("\n%i\n", password);
-    printf("Bienvenido: %s cuenta creada con éxito!!", initial[i].user);
-    sleep(2);
-    login();
+            printf("\n%s\n", user);
+            sleep(5);
+    for ( i = 1; i <= 20; i++)
+    {
+        if(strcmp(user, initial[i].user) > 0 && strlen(initial[i].user) == 0) {
+            initial[i].user = user;
+            initial[i].pass = password;
+            printf("Bienvenido: %s cuenta creada con éxito!!", initial[i].user);
+            sleep(2);
+            login();
+            break;
+        } else if(strlen(initial[i].user) > 0 && strlen(initial[i-1].user) > 0) {
+            printf("El usuario ya existe");
+            sleep(2);
+            login();
+        }
+    }
+    
 }
 
 int main() {
     login();
     return 0;
-}
+}
