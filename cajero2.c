@@ -2,65 +2,69 @@
 #include <stdlib.h>
 #include <math.h>
 #include <conio.h>
+#include <string.h>
 #include "login/index.h"
-// #include <graphics.h>
 
-// Métodología LIFO Last-in, first-out
 
 struct initialState
 {
     char user;
-    char pass;
-    int agua; // Recibos pagados
-    int luz; // recibos pagados
-    float money; // Dinero total
-    float adelanto; // Saldo total menos el adelanto
-    float claro; // gasto en recarga
-    float movistar; // gasto en recarga
-    char bancos[4]; // deposito de los bancos
-    /* O es BANPRO, 1 BDF, 2 LAFISE, AVANZ, FICOHSA */
-    
-}initialState[20];
+    int pass;
+    int agua; 
+    int luz; 
+    float money; 
+    float adelanto; 
+    float claro; 
+    float movistar;     
+} initial[20];
+
 
 int reducer(int state, char action) {
-    state = 0; // El estado en 0 es Log out y 1 Login
-    return state; // return response
+    state = 0;
+    return state;
+    return 0;
 }
 
+void perfil() {
+    printf("Bienvendio\n");
 
+}
 
-        // printf("%s\n", submit.user);
-void createStore(user, password) {
-    
+int validar(char user, int password) {
     int i;
     int response;
 
     system("cls");
     sleep(1);
-    printf("\n[#");
+    printf("\n[=");
     sleep(1);
-    printf("#");
-    printf("###########");
+    printf("=");
+    printf("===========");
     sleep(1);
-    printf("##########################]");
+    printf("=================");
+    sleep(1);
+    printf("==============================]");
     sleep(1);
     system("cls");
-    system("color 2");
-    printf("\n Compiled Succefull!");
-    sleep(1);
-    system("color 3");
+    textcolor(GREEN);printf("\n Compiled Succefull!");
+    printf("%i", password);    
+    sleep(2);
 
-    for ( i = 0; i <= 20; i++)
+    for ( i = 0; i < 20; i++)
     {
-        if(initialState[i].user == user && initialState[i].pass == password ){
+        if (strcmp(user,initial[i].user) == 0&& password == initial[i].pass)
+        {
             response = 1;
-        } else {
-            response = 0;
         }
+        
     }
-    if (response)
+    
+    
+    if (response  >0)
     {
-        printf("Bienvenido, PAGA TUS DEUDAS >:V\n");
+        printf("\nBienvenido, PAGA TUS DEUDAS >:V\n");
+        sleep(2);
+        perfil();
     } else
     {
         printf("\n\n\tNo existe, no lo hay xd\n\n");
@@ -73,15 +77,24 @@ void createStore(user, password) {
             login();
         } else {
             printf("Adios y no vuelva");
+            getch();
         }
     }
+
 }
 
+int userNew(char user, int password) {
+    int i = 1;
+    system("cls");
+    initial[i].user = user;
+    initial[i].pass = password;
+    printf("\n%i\n", password);
+    printf("Bienvenido: %s cuenta creada con éxito!!", initial[i].user);
+    sleep(2);
+    login();
+}
 
 int main() {
-
     login();
-    // printf("\nLa clave es: %s\n", password);
-
     return 0;
 }
