@@ -1,0 +1,1 @@
+Este cajero esta diseñado en C
