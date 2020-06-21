@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -21,6 +22,7 @@ struct initialState
     int luz;
     float money;
     float adelanto;
+    float transferencia;
     float claro;
     float movistar;
     struct BDF bdf;
@@ -37,10 +39,12 @@ int perfil(int i, char user)
 {
     system("cls");
     initial[i].bdf.pago = 20;
-    printf("\n%i\n", i);
-    printf("%i", initial[i].bdf.pago);
     printf("Bienvendio %s\n", user);
-
+    printf("tiene múltiples opciones");
+    printf("\t\t\n1.Pagar Agua\t\t2.Pagar luz\n");
+    printf("\t\t\n3.Recarga Claro\t\t4.Recarga Movistar\n");
+    printf("\t\t\n5.Transferir\t\t6.Adelantar\n");
+    printf("\t\t\n7.Cambiar PIN\t\t8.Salir\n");
     getch();
 }
 
@@ -107,29 +111,34 @@ int validar(user, password)
     }
 }
 
-int userNew(char user, int password)
+int userNew(user, password)
 {
     int i = 1;
+    int hola;
+    int response = -1;
+    fflush(stdin);
     system("cls");
     printf("\n%s\n", user);
     sleep(1);
-    for (i = 1; i <= 20; i++)
+    for (i = 1; i<= 20; i++)
     {
-        if (strcmp(user, initial[i].user) > 0 && strlen(initial[i].user) == 0)
+        if (strlen(initial[i].user) == 0 && strlen(user) > 0)
         {
-            initial[i].user = user;
-            initial[i].pass = password;
-            printf("Bienvenido: %s cuenta creada con éxito!!", initial[i].user);
-            sleep(2);
-            login();
             break;
         }
-        else if (strlen(initial[i].user) > 0 && strlen(initial[i - 1].user) > 0)
-        {
-            printf("El usuario ya existe");
-            sleep(2);
-            login();
-        }
+    }
+    printf("\n%i\n", i);
+    if(i >= 1) {
+        initial[i].user = user;
+        initial[i].pass = password;
+        printf("Bienvenido: %i cuenta creada con éxito!!", initial[i].pass);
+        sleep(2);
+        login();
+    } else {
+        printf("Ha ocurrido un error");
+        printf("\nNo se preocupe puede volver a intentarlo\n");
+        sleep(1);
+        login();
     }
 }
 
@@ -138,3 +147,4 @@ int main()
     login();
     return 0;
 }
+
