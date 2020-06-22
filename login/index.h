@@ -1,18 +1,20 @@
-#include<string.h>
 
 void login() {
     int i = 0;
     int password;
     int option;
-    char caracter;
-    char users[20];
-
-
+    char users[44];
+    password = 0;
     system("cls");
     printf("\n\n\t\tBienvenido al cajero ;)");
     printf("\n\n1. Iniciar Sesion\n");
     printf("\n\n2. Registrarse\n\n");
     printf("\n-->3. Salir\n");
+
+    for (i = 0; i <= 20; i++)
+    {
+        users[i] = '\0';
+    }
 
     scanf("%i", &option);
 
@@ -30,7 +32,6 @@ void login() {
     printf("\nIngrese su password\n");
     scanf("%i", &password);
     validar(users, password);
-
 
     break;
     case 2:
