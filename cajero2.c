@@ -39,7 +39,6 @@ struct initialState
     float luz;
     float money;
     float adelanto;
-    float transferencia;
     float claro;
     float movistar;
     struct BDF bdf;
@@ -49,60 +48,75 @@ struct initialState
     struct Banpro banpro;
 } initial[20];
 
-int water(i, lenguaje) {
-    if (lenguaje == 1)
-    {
-        initial[i].agua == 50 * lenguaje;
-        printf("\n\n");
-        initial[i].money = initial[i].money -  initial[i].agua;
-        printf("Lo sentimos el límite de pago fue ayer, quiere pagar reconexiom?");
-        return 0;
-    } else {
-        initial[i].agua = 50;
-        return 0;
-    }
-
-
-    return 0;
-}
-
-int pago(pago, leng, i) {
+int pago(pago, i, length) {
     int pin = 0;
+    int resta;
+
     switch (pago)
     {
     case 1:
         printf("\nUsted tiene una cuota de 32 recibos pendientes\n");
-        initial[i].agua = initial[i].money - 50;
-        initial[i].money = initial[i].money * leng;
+        if(initial[i].agua == 0) {
+            printf("Felicidades! no debe nada\n");
+        } else {
+        initial[i].money = initial[i].money - initial[i].agua;
+        initial[i].agua = 0;
+        perfil(i, initial[i].user);
+        }
         break;
     case 2:
         printf("\nUsted tiene una cuota de 32 recibos pendientes\n");
-        initial[i].luz = initial[i].money - 50;
-        initial[i].money = initial[i].money * leng;
+        printf("Casi no haya servicio ");
+        if(initial[i].luz == 0) {
+            printf("Felicidades! no debe nada\n");
+            system("pause");
+            perfil(i, initial[i].user);
+        } else {
+            initial[i].money = initial[i].money - initial[i].luz;
+            initial[i].luz = 0;
+            system("pause");
+            perfil(i, initial[i].user);
+        }
         break;
     case 3:
         printf("\nIngrese el precio de la recarga\n");
         scanf("%i", &pin);
-        pin = pin * leng;
-        initial[i].claro = initial[i].money - pin;
-        initial[i].money = initial[i].money * leng;
+        pin = pin;
+        initial[i].claro++;
+        initial[i].money = initial[i].money - pin;
         printf("\nSe ha debitado el 90 de su recarga por deuda pendiente\n");
+        perfil(i, initial[i].user);
         break;
     case 4:
         printf("\nIngrese el precio de la recarga\n");
         scanf("%i", &pin);
-        pin = pin * leng;
+        pin = pin;
         initial[i].movistar = initial[i].money - pin;
-        initial[i].money = initial[i].money * leng;
+        initial[i].money = initial[i].money;
         printf("\nSe ha debitado el 90 de su recarga por deuda pendiente\n");
+        perfil(i, initial[i].user);
         break;
     case 5:
-        initial[i].transferencia = initial[i].money - 50;
-        initial[i].money = initial[i].money * leng;
+        system("cls");
+        printf("\nEsta es la lista de usuarios\n");
+        for (pin = 1; pin <=20; pin++)
+        {
+            if(initial[pin].pass > 0){
+                printf("%i. %s\n", pin, initial[pin].user);
+            }
+        }
+        scanf("%i", &pin);
+        printf("Bien y ahora cuanto vas a dar");
+        scanf("%i", &resta);
+        if(length == 1) resta = resta / length;
+        initial[pin].money = initial[pin].money + resta;
+        initial[i].money = initial[i].money - resta;
+        perfil(i, initial[i].user);
         break;
     case 6:
         initial[i].adelanto = initial[i].money - 50;
-        initial[i].money = initial[i].money * leng;
+        initial[i].money = initial[i].money;
+        perfil(i, initial[i].user);
         break;
     case 7:
         printf("Ingrese el nuevo pin");
@@ -119,10 +133,10 @@ int pago(pago, leng, i) {
 int perfil(i, user)
 {
     int option;
-    int lenguaje;
+    int lenguaje = 1;
     system("cls");
     printf("\t\tAntes de inicar tu cuenta, como quieres configurarla?\n");
-    printf("1. Cordoba");
+    printf("1. Cordoba\n");
     printf("2. Dolar");
     scanf("%i", &option);
     system("cls");
@@ -139,8 +153,7 @@ int perfil(i, user)
         break;
     }
     option = 0;
-    initial[i].money = 5000 * lenguaje;
-    printf("\t\tBienvendio %s\n", initial[i].user);
+    printf("\t\tBienvendio %f\n", initial[i].money * lenguaje);
     printf("\t\ttiene múltiples opciones\n");
     printf("\t\t\n1.Pagar Agua\t\t2.Pagar luz\n");
     printf("\t\t\n3.Recarga Claro\t\t4.Recarga Movistar\n");
@@ -150,25 +163,25 @@ int perfil(i, user)
     switch (option)
     {
     case 1:
-        pago(1, lenguaje, i);
+        pago(1, i, lenguaje);
         break;
     case 2:
-        pago(2, lenguaje, i);
+        pago(2, i, lenguaje);
         break;
     case 3:
-        pago(3, lenguaje, i);
+        pago(3, i, lenguaje);
         break;
     case 4:
-        pago(4, lenguaje, i);
+        pago(4, i, lenguaje);
         break;
     case 5:
-        pago(5, lenguaje, i);
+        pago(5, i, lenguaje);
         break;
     case 6:
-        pago(6, lenguaje, i);
+        pago(6, i, lenguaje);
         break;
     case 7:
-        pago(7, lenguaje, i);
+        pago(7, i, lenguaje);
         break;
     case 8:
         login();
@@ -260,6 +273,11 @@ int userNew(user, key)
     printf("\n%i\n", i);
         strcpy(initial[i].user, user);
         initial[i].pass = key;
+        initial[i].money = 500;
+        initial[i].luz = 50;
+        initial[i].agua = 50;
+        initial[i].claro= 0;
+        initial[i].movistar= 0;
         printf("Bienvenido: %s cuenta creada con éxito!!", initial[i].user);
         sleep(2);
         login();

@@ -6,6 +6,27 @@ Se ejecuta en un compilador con turbo C
 
 ### 1. graphics.h
 
+# Ficheros
+
+Los ficheros de pagos estan en el archivo pay.txt y tiene el siguiente orden
+## Agua
+
+## Luz
+
+## claro
+
+## movistar
+
+## DBF
+
+## Ficohsa
+
+## Lafise
+
+## Avanz
+
+## Banpro
+
 # Extra
 
 El frontend no es el mejor
