@@ -1,34 +1,20 @@
 #include <stdio.h>
 
-
-int regis(hola) {
-    int elige;
-    printf("Hoola");
-    scanf("%i", &elige);
-    switch (elige)
-    {
-    case 1:
-        login();
-        break;
-    
-    default:
-    return 0;
-        break;
-    }
-    getch();
-    return 0; 
-}
+struct corre {
+    char core[20];
+} corre[2];
 
 int login() {
-    char hola[16];
+    char err[16];
+    int holas;
     FILE * me;
-    
-    printf("Añade texto");
-    scanf("%s", &hola);
-    me = fopen("FILE.txt", "w");
-    fprintf(me, "Anida esto we %s\n", hola);
-    fclose(me);
-    regis();
+    me = fopen("users.txt", "r");
+    for(holas = 1; holas <= 2; holas++) {
+        fscanf(me, "%s", corre[holas].core);
+    }
+        fclose(me);
+		printf("%s\n" ,corre[2].core);
+        getch();
 }
 
 int main() {

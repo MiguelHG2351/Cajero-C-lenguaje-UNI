@@ -137,7 +137,7 @@ int perfil(i, user)
     system("cls");
     printf("\t\tAntes de inicar tu cuenta, como quieres configurarla?\n");
     printf("1. Cordoba\n");
-    printf("2. Dolar");
+    printf("2. Dolar\n");
     scanf("%i", &option);
     system("cls");
     switch (option)
@@ -254,6 +254,81 @@ int validar(name, password)
     }
 }
 
+int saveMoney(response) {
+    int i=1;
+        FILE * new;
+    if(response == 1) {
+        system("cls");
+        new = fopen("pay.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%f\n", initial[i].money);
+            i++;
+        }
+        fclose(new);
+    } else if(response == 2) {
+        new = fopen("pay.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%i", &initial[i].money);
+        }
+        fclose(new);
+        printf("%f", initial[1].money);
+        sleep(3);
+        login();
+    }
+}
+
+int savePass(response) {
+    int i=1;
+        FILE * new;
+    if(response == 1) {
+        system("cls");
+        new = fopen("pass.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%i\n", initial[i].pass);
+            i++;
+        }
+        fclose(new);
+        saveMoney(1);
+    } else if(response == 2) {
+        new = fopen("pass.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%i", &initial[i].pass);
+        }
+        fclose(new);
+        saveMoney(2);
+    }
+}
+
+int saveUsers(response) {
+    int i=1;
+        FILE * new;
+    if(response == 1) {
+        system("cls");
+        new = fopen("users.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%s\n", initial[i].user);
+            i++;
+        }
+        fclose(new);
+        savePass(1);
+    } else if(response == 2) {
+        new = fopen("users.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%s", initial[i].user);
+        }
+        fclose(new);
+        savePass(2);
+    }
+}
+
+int postData() {
+    saveUsers(1);
+}
+
+int getData() {
+    saveUsers(2);
+}
+
 int userNew(user, key)
 {
     int i = 1;
@@ -289,9 +364,8 @@ int userNew(user, key)
     }
 }
 
-
 int main()
 {
-    login();
+    getData();
     return 0;
 }
