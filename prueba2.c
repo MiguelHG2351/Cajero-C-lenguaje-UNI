@@ -1,26 +1,28 @@
 #include <stdio.h>
 
 struct corre {
-    char core[20];
+    float core;
 } corre[2];
 
 int login() {
     char err[16];
     int holas;
     FILE * me;
-    me = fopen("users.txt", "r");
+    me = fopen("riales.txt", "r");
     for(holas = 1; holas <= 2; holas++) {
-        fscanf(me, "%s", corre[holas].core);
+        fscanf(me, "%f", &corre[holas].core);
     }
-        fclose(me);
-		printf("%s\n" ,corre[2].core);
-        getch();
+    fclose(me);
+	printf("%.2f\n" , corre[1].core);
+    getch();
 }
 
 int main() {
-    
+	int response = 1;
+	system("cls");
     printf("Este proyect re escribe un archivo");
-    login();
 
+            response ? printf("error\n") : printf("hola\n");
+  getch();
     return 0;
 }

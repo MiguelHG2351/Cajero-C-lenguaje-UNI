@@ -50,7 +50,7 @@ struct initialState
 
 int pago(pago, i, length) {
     int pin = 0;
-    int resta;
+    float resta;
 
     switch (pago)
     {
@@ -107,7 +107,7 @@ int pago(pago, i, length) {
         }
         scanf("%i", &pin);
         printf("Bien y ahora cuanto vas a dar");
-        scanf("%i", &resta);
+        scanf("%f", &resta);
         if(length == 1) resta = resta / length;
         initial[pin].money = initial[pin].money + resta;
         initial[i].money = initial[i].money - resta;
@@ -254,26 +254,68 @@ int validar(name, password)
     }
 }
 
+int saveServices(response) {
+    int i=1;
+    int j = 1;
+    int a = 2;
+    float agua;
+    float luz;
+    float claro;
+    float tigo;
+    FILE * new;
+    if(response == 1) {
+        system("cls");
+        new = fopen("services.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%f\n", initial[i].agua);
+            fprintf(new, "%f\n", initial[i].luz);
+            fprintf(new, "%f\n", initial[i].claro);
+            fprintf(new, "%f\n", initial[i].movistar);
+            i= 3*a;
+            a++;
+        }
+        fclose(new);
+    } else if(response == 2) {
+        new = fopen("services.txt", "r");
+        while(initial[j].pass > 0) {
+            fscanf(new, "%f %f %f %f", &agua, &luz, &claro, &tigo);
+            initial[i].agua = agua;
+            initial[i].claro = luz;
+            initial[i].claro = claro;
+            initial[i].movistar = tigo;
+            i= 3*a;
+            a++;
+            j++;
+        }
+        fclose(new);
+        printf("%f", initial[1].claro);
+        sleep(3);
+        login();
+    }
+}
+
 int saveMoney(response) {
     int i=1;
+    float holis;
         FILE * new;
     if(response == 1) {
         system("cls");
-        new = fopen("pay.txt", "w");
+        new = fopen("riales.txt", "w");
         while(initial[i].pass > 0) {
             fprintf(new, "%f\n", initial[i].money);
             i++;
         }
         fclose(new);
     } else if(response == 2) {
-        new = fopen("pay.txt", "r");
+        new = fopen("riales.txt", "r");
         for(i=1;i<=5; i++) {
-            fscanf(new, "%i", &initial[i].money);
+            fscanf(new, "%f", &holis);
+            initial[i].money = holis;
         }
         fclose(new);
         printf("%f", initial[1].money);
         sleep(3);
-        login();
+        saveServices(2);
     }
 }
 
