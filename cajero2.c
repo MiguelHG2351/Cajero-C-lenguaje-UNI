@@ -153,7 +153,8 @@ int perfil(i, user)
         break;
     }
     option = 0;
-    printf("\t\tBienvendio %f\n", initial[i].money * lenguaje);
+    printf("\t\tBienvendio %s\n", initial[i].user);
+    printf("\nDinero disponible: %f\n", initial[i].money * lenguaje);
     printf("\t\ttiene múltiples opciones\n");
     printf("\t\t\n1.Pagar Agua\t\t2.Pagar luz\n");
     printf("\t\t\n3.Recarga Claro\t\t4.Recarga Movistar\n");
@@ -254,49 +255,55 @@ int validar(name, password)
     }
 }
 
-int saveServices(response) {
-    int i=1;
-    int j = 1;
-    int a = 2;
-    float agua;
-    float luz;
-    float claro;
-    float tigo;
-    FILE * new;
+int saveAgua(response) {
+   int i=1;
+    float hola;
+        FILE * new;
     if(response == 1) {
-        system("cls");
-        new = fopen("services.txt", "w");
+        new = fopen("luz.txt", "w");
         while(initial[i].pass > 0) {
-            fprintf(new, "%f\n", initial[i].agua);
             fprintf(new, "%f\n", initial[i].luz);
-            fprintf(new, "%f\n", initial[i].claro);
-            fprintf(new, "%f\n", initial[i].movistar);
-            i= 3*a;
-            a++;
+            i++;
         }
         fclose(new);
     } else if(response == 2) {
-        new = fopen("services.txt", "r");
-        while(initial[j].pass > 0) {
-            fscanf(new, "%f %f %f %f", &agua, &luz, &claro, &tigo);
-            initial[i].agua = agua;
-            initial[i].claro = luz;
-            initial[i].claro = claro;
-            initial[i].movistar = tigo;
-            i= 3*a;
-            a++;
-            j++;
+        new = fopen("luz.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%f", &hola);
+            initial[i].luz = hola;
         }
         fclose(new);
-        printf("%f", initial[1].claro);
+        saveLuz(2);
+    }
+}
+
+int saveAgua(response) {
+   int i=1;
+    float hola;
+        FILE * new;
+    if(response == 1) {
+        system("cls");
+        new = fopen("agua.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%f\n", initial[i].agua);
+            i++;
+        }
+        fclose(new);
+    } else if(response == 2) {
+        new = fopen("agua.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%f", &hola);
+            initial[i].agua = hola;
+        }
+        fclose(new);
         sleep(3);
-        login();
+        saveLuz(2);
     }
 }
 
 int saveMoney(response) {
     int i=1;
-    float holis;
+    float hola;
         FILE * new;
     if(response == 1) {
         system("cls");
@@ -309,13 +316,11 @@ int saveMoney(response) {
     } else if(response == 2) {
         new = fopen("riales.txt", "r");
         for(i=1;i<=5; i++) {
-            fscanf(new, "%f", &holis);
-            initial[i].money = holis;
+            fscanf(new, "%f", &hola);
+            initial[i].money = hola;
         }
         fclose(new);
-        printf("%f", initial[1].money);
-        sleep(3);
-        saveServices(2);
+        saveAgua(2);
     }
 }
 

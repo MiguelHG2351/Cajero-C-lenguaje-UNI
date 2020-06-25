@@ -18,11 +18,20 @@ int login() {
 }
 
 int main() {
-	int response = 1;
+    char hola[20];
+    int i;
+	FILE * new;
 	system("cls");
-    printf("Este proyect re escribe un archivo");
+		new = fopen("services.txt", "r");
+    for(i=1;i<=2; i++) {
+			fscanf(new, "%i", &hola[i]);
+            i++;
+        }
 
-            response ? printf("error\n") : printf("hola\n");
+        fclose(new);
+            printf("%f", hola[2]);
+        sleep(3);
+        login();
   getch();
     return 0;
 }
