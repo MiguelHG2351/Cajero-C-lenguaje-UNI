@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -66,7 +67,7 @@ int pago(pago, i, length) {
         break;
     case 2:
         printf("\nUsted tiene una cuota de 32 recibos pendientes\n");
-        printf("Casi no haya servicio ");
+        printf("Casi no haya servicio \n");
         if(initial[i].luz == 0) {
             printf("Felicidades! no debe nada\n");
             system("pause");
@@ -84,7 +85,8 @@ int pago(pago, i, length) {
         pin = pin;
         initial[i].claro++;
         initial[i].money = initial[i].money - pin;
-        printf("\nSe ha debitado el 90 de su recarga por deuda pendiente\n");
+        printf("\nSe ha debitado el 90%c de su recarga por deuda pendiente\n", 37);
+        getch();
         perfil(i, initial[i].user);
         break;
     case 4:
@@ -114,8 +116,10 @@ int pago(pago, i, length) {
         perfil(i, initial[i].user);
         break;
     case 6:
-        initial[i].adelanto = initial[i].money - 50;
-        initial[i].money = initial[i].money;
+        printf("Adelantando...");
+        scanf("%f", &resta);
+        initial[i].adelanto =  resta;
+        initial[i].money = initial[i].money + initial[i].money;
         perfil(i, initial[i].user);
         break;
     case 7:
@@ -255,7 +259,53 @@ int validar(name, password)
     }
 }
 
-int saveAgua(response) {
+
+
+int saveMovistar(response) {
+   int i=1;
+    float hola;
+        FILE * new;
+    if(response == 1) {
+        new = fopen("movistar.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%f\n", initial[i].movistar);
+            i++;
+        }
+        fclose(new);
+    } else if(response == 2) {
+        new = fopen("movistar.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%f", &hola);
+            initial[i].movistar = hola;
+        }
+        fclose(new);
+        login();
+    }
+}
+
+int saveClaro(response) {
+   int i=1;
+    float hola;
+        FILE * new;
+    if(response == 1) {
+        new = fopen("claro.txt", "w");
+        while(initial[i].pass > 0) {
+            fprintf(new, "%f\n", initial[i].claro);
+            i++;
+        }
+        fclose(new);
+    } else if(response == 2) {
+        new = fopen("claro.txt", "r");
+        for(i=1;i<=5; i++) {
+            fscanf(new, "%f", &hola);
+            initial[i].claro = hola;
+        }
+        fclose(new);
+        saveMovistar(2);
+    }
+}
+
+int saveLuz(response) {
    int i=1;
     float hola;
         FILE * new;
@@ -273,7 +323,7 @@ int saveAgua(response) {
             initial[i].luz = hola;
         }
         fclose(new);
-        saveLuz(2);
+        saveClaro(2);
     }
 }
 
@@ -415,4 +465,4 @@ int main()
 {
     getData();
     return 0;
-}
+}
