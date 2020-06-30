@@ -116,7 +116,7 @@ int router(response) {
         break;
     }
 }
-
+/* Virus */
 int main()
 {
     system("cls");
