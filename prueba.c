@@ -26,7 +26,7 @@ int login() {
     {
     for (d = 0 ; d < n - c - 1; d++)
     {
-      if (notas[d] > notas[d+1]) /* For decreasing order use < */
+      if (notas[d] > notas[d+1]) /* For decreasing order use, modificado < */
       {
         swap       = notas[d];
         notas[d]   = notas[d+1];
