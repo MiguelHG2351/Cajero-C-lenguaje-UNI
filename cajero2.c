@@ -1,4 +1,5 @@
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -94,8 +95,9 @@ int pago(pago, i, length) {
         scanf("%i", &pin);
         pin = pin;
         initial[i].movistar = initial[i].movistar + pin;
-        initial[i].money = initial[i].money -pin;
-        printf("\nSe ha debitado el 90 de su recarga por deuda pendiente\n");
+        initial[i].money = initial[i].money - pin;
+        printf("\nSe ha debitado el 90%c de su recarga por deuda pendiente\n", 37);
+        getch();
         perfil(i, initial[i].user);
         break;
     case 5:
@@ -214,7 +216,7 @@ int validar(name, password)
     sleep(2);
     system("cls");
     printf("\n Compiled Succefull!");
-    printf("\n%i\n", initial[3].movistar);
+    printf("\n%f\n", initial[3].movistar);
     printf("\n%s\n", initial[3].user);
     printf("\n%s\n", name);
     printf("\n%i\n", password);
@@ -263,7 +265,7 @@ int validar(name, password)
 int saveMovistar(response) {
    int i=1;
     float hola;
-        FILE * new;
+    FILE * new;
     if(response == 1) {
         new = fopen("movistart.txt", "w");
         while(initial[i].pass > 0) {
