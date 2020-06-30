@@ -456,6 +456,7 @@ int userNew(user, key)
         initial[i].agua = 50;
         initial[i].claro= 0;
         initial[i].movistar= 0;
+        initial[i].adelanto= 5000;
         printf("Bienvenido: %s cuenta creada con éxito!!", initial[i].user);
         sleep(2);
         login();
@@ -471,4 +472,4 @@ int main()
 {
     getData();
     return 0;
-}
+}
