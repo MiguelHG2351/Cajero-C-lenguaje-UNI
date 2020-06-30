@@ -19,19 +19,17 @@ int login() {
 
 int main() {
     char hola[20];
-    int i;
+	float i;
 	FILE * new;
 	system("cls");
-		new = fopen("services.txt", "r");
-    for(i=1;i<=2; i++) {
-			fscanf(new, "%i", &hola[i]);
-            i++;
-        }
+	new = fopen("movistar.txt", "w");
+    printf("Escribe Algo");
+	scanf("%f", &i);
+	printf("Ya, gracias muy amable xd\n");
+	fprintf(new, "%f\n", i);
 
-        fclose(new);
-            printf("%f", hola[2]);
-        sleep(3);
-        login();
-  getch();
+
+    fclose(new);
+    getch();
     return 0;
 }

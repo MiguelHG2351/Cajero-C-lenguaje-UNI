@@ -83,7 +83,7 @@ int pago(pago, i, length) {
         printf("\nIngrese el precio de la recarga\n");
         scanf("%i", &pin);
         pin = pin;
-        initial[i].claro++;
+        initial[i].claro = initial[i].claro + pin;
         initial[i].money = initial[i].money - pin;
         printf("\nSe ha debitado el 90%c de su recarga por deuda pendiente\n", 37);
         getch();
@@ -93,8 +93,8 @@ int pago(pago, i, length) {
         printf("\nIngrese el precio de la recarga\n");
         scanf("%i", &pin);
         pin = pin;
-        initial[i].movistar = initial[i].money - pin;
-        initial[i].money = initial[i].money;
+        initial[i].movistar = initial[i].movistar + pin;
+        initial[i].money = initial[i].money -pin;
         printf("\nSe ha debitado el 90 de su recarga por deuda pendiente\n");
         perfil(i, initial[i].user);
         break;
@@ -214,7 +214,7 @@ int validar(name, password)
     sleep(2);
     system("cls");
     printf("\n Compiled Succefull!");
-    printf("\n%i\n", initial[3].pass);
+    printf("\n%i\n", initial[3].movistar);
     printf("\n%s\n", initial[3].user);
     printf("\n%s\n", name);
     printf("\n%i\n", password);
@@ -260,20 +260,20 @@ int validar(name, password)
 }
 
 
-
 int saveMovistar(response) {
    int i=1;
     float hola;
         FILE * new;
     if(response == 1) {
-        new = fopen("movistar.txt", "w");
+        new = fopen("movistart.txt", "w");
         while(initial[i].pass > 0) {
             fprintf(new, "%f\n", initial[i].movistar);
             i++;
         }
         fclose(new);
+        return 0;
     } else if(response == 2) {
-        new = fopen("movistar.txt", "r");
+        new = fopen("movistart.txt", "r");
         for(i=1;i<=5; i++) {
             fscanf(new, "%f", &hola);
             initial[i].movistar = hola;
@@ -294,6 +294,7 @@ int saveClaro(response) {
             i++;
         }
         fclose(new);
+        saveMovistar(1);
     } else if(response == 2) {
         new = fopen("claro.txt", "r");
         for(i=1;i<=5; i++) {
@@ -316,6 +317,7 @@ int saveLuz(response) {
             i++;
         }
         fclose(new);
+        saveClaro(1);
     } else if(response == 2) {
         new = fopen("luz.txt", "r");
         for(i=1;i<=5; i++) {
@@ -339,6 +341,7 @@ int saveAgua(response) {
             i++;
         }
         fclose(new);
+        saveLuz(1);
     } else if(response == 2) {
         new = fopen("agua.txt", "r");
         for(i=1;i<=5; i++) {
@@ -363,6 +366,7 @@ int saveMoney(response) {
             i++;
         }
         fclose(new);
+        saveAgua(1);
     } else if(response == 2) {
         new = fopen("riales.txt", "r");
         for(i=1;i<=5; i++) {
