@@ -60,10 +60,11 @@ int pago(pago, i, length) {
         printf("\nUsted tiene una cuota de 32 recibos pendientes\n");
         if(initial[i].agua == 0) {
             printf("Felicidades! no debe nada\n");
+            perfil(i, initial[i].user);
         } else {
-        initial[i].money = initial[i].money - initial[i].agua;
-        initial[i].agua = 0;
-        perfil(i, initial[i].user);
+            initial[i].money = initial[i].money - initial[i].agua;
+            initial[i].agua = 0;
+            perfil(i, initial[i].user);
         }
         break;
     case 2:
@@ -216,8 +217,6 @@ int validar(name, password)
     sleep(2);
     system("cls");
     printf("\n Compiled Succefull!");
-    printf("\n%f\n", initial[3].movistar);
-    printf("\n%s\n", initial[3].user);
     printf("\n%s\n", name);
     printf("\n%i\n", password);
 
@@ -237,14 +236,14 @@ int validar(name, password)
 
     if (response >= 0)
     {
-        printf("\n\tBienvenido!!!, PAGA TUS DEUDAS >:V\n");
+        printf("\n\tBienvenido!!!, PAGA TUS DEUDAS para evitar problemas\n");
         printf("%i", i);
         sleep(2);
         perfil(i, initial[i].user);
     }
     else
     {
-        printf("\n\n\tNo existe, no lo hay xd\n\n");
+        printf("\n\n\tNo existe, no lo hay :( \n\n");
         printf("\tQuieres registrarte y empezar a endeudarte?\n");
         printf("\t1. Si\n");
         printf("\t2. No\n");
@@ -261,7 +260,6 @@ int validar(name, password)
     }
 }
 
-
 int saveMovistar(response) {
    int i=1;
     float hola;
@@ -276,7 +274,7 @@ int saveMovistar(response) {
         return 0;
     } else if(response == 2) {
         new = fopen("movistart.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%f", &hola);
             initial[i].movistar = hola;
         }
@@ -299,7 +297,7 @@ int saveClaro(response) {
         saveMovistar(1);
     } else if(response == 2) {
         new = fopen("claro.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%f", &hola);
             initial[i].claro = hola;
         }
@@ -322,7 +320,7 @@ int saveLuz(response) {
         saveClaro(1);
     } else if(response == 2) {
         new = fopen("luz.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%f", &hola);
             initial[i].luz = hola;
         }
@@ -346,7 +344,7 @@ int saveAgua(response) {
         saveLuz(1);
     } else if(response == 2) {
         new = fopen("agua.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%f", &hola);
             initial[i].agua = hola;
         }
@@ -371,7 +369,7 @@ int saveMoney(response) {
         saveAgua(1);
     } else if(response == 2) {
         new = fopen("riales.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%f", &hola);
             initial[i].money = hola;
         }
@@ -394,7 +392,7 @@ int savePass(response) {
         saveMoney(1);
     } else if(response == 2) {
         new = fopen("pass.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%i", &initial[i].pass);
         }
         fclose(new);
@@ -416,7 +414,7 @@ int saveUsers(response) {
         savePass(1);
     } else if(response == 2) {
         new = fopen("users.txt", "r");
-        for(i=1;i<=5; i++) {
+        for(i=1;i<=20; i++) {
             fscanf(new, "%s", initial[i].user);
         }
         fclose(new);
